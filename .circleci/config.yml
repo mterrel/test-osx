@@ -1,0 +1,57 @@
+version: 2
+jobs:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      # run tests!
+      - run: yarn test
+
+  mac_test:
+    macos:
+      xcode: "11.0.0"
+    working_directory: ~/repo
+    steps:
+    - attach_workspace:
+        at: ~/
+    - restore_cache:
+        keys:
+        - homebrew-macos-v14
+    - run:
+        command: ./.circleci/macos_circle_vm_setup.sh
+        name: macOS Docker setup
+    - save_cache:
+        key: homebrew-macos-v14
+        paths:
+        - /usr/local/Homebrew
+        - /usr/local/Cellar
+        - ~/Library/Caches/Homebrew
+    - run:
+        command: docker info
+        name: Docker info
+

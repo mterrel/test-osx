@@ -1,0 +1,12 @@
+{
+  "name": "test-osx",
+  "version": "0.0.1",
+  "description": "A test project for MacOS testing",
+  "main": "index.js",
+  "repository": "git@github.com:mterrel/test-osx.git",
+  "author": "Mark Terrel <mark@unbounded.systems>",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo Success"
+  }
+}
