@@ -15,4 +15,4 @@ nohup /Applications/Docker.app/Contents/MacOS/Docker --unattended &
 while ! docker ps ; do
   sleep 5
   echo "Waiting for docker to come up: $(date)"
-done'
+done
