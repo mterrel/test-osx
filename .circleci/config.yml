@@ -11,6 +11,8 @@ jobs:
         keys:
         - homebrew-macos-v14
     - run:
+        command: pwd && ls -a && ls -a *
+    - run:
         command: ./.circleci/macos_circle_vm_setup.sh
         name: macOS Docker setup
     - save_cache:
