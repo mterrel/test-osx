@@ -3,16 +3,11 @@ jobs:
   build:
     macos:
       xcode: "11.0.0"
-    # working_directory: ~/repo
     steps:
-    # - attach_workspace:
-    #     at: ~/
     - checkout
     - restore_cache:
         keys:
         - homebrew-macos-v14
-    - run:
-        command: pwd && ls -a && ls -a *
     - run:
         command: ./.circleci/macos_circle_vm_setup.sh
         name: macOS Docker setup
@@ -25,4 +20,12 @@ jobs:
     - run:
         command: docker info
         name: Docker info
+    - run:
+        command: node --version || true
+    - run:
+        command: npm --version || true
+    - run:
+        command: npm install -g yarn markdown-clitest || true
+    - run:
+        command: DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
 
