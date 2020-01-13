@@ -11,8 +11,8 @@ open -W Docker.dmg && cp -r /Volumes/Docker/Docker.app /Applications
 sudo /Applications/Docker.app/Contents/MacOS/Docker --quit-after-install --unattended
 nohup /Applications/Docker.app/Contents/MacOS/Docker --unattended &
 
-#timeout -v 10m bash -c 'while ! docker ps 2>/dev/null ; do
-timeout -v 10m bash -c 'while ! docker ps ; do
+#while ! docker ps 2>/dev/null ; do
+while ! docker ps ; do
   sleep 5
   echo "Waiting for docker to come up: $(date)"
 done'
