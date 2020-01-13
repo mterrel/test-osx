@@ -9,10 +9,14 @@ curl -O -sSL $DOCKER_URL
 open -W Docker.dmg && cp -r /Volumes/Docker/Docker.app /Applications
 
 sudo /Applications/Docker.app/Contents/MacOS/Docker --quit-after-install --unattended
+
+# Start Docker running and then work on doing the rest of the setup while
+# Docker starts up
 nohup /Applications/Docker.app/Contents/MacOS/Docker --unattended &
 
-#while ! docker ps 2>/dev/null ; do
-while ! docker ps ; do
+npm install -g yarn markdown-clitest
+
+while ! docker ps 2>/dev/null ; do
   sleep 5
   echo "Waiting for docker to come up: $(date)"
 done
