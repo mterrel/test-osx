@@ -11,7 +11,7 @@ curl -o gcloud.tgz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/go
 tar -xf gcloud.tgz
 ./google-cloud-sdk/install.sh -q
 . ./google-cloud-sdk/path.bash.inc
-echo "$GCLOUD_SERVICE_KEY" > key.json
+echo "$GOOGLE_SERVICE_KEY" > key.json
 gcloud auth activate-service-account --key-file=key.json
 popd
 gcloud auth list
