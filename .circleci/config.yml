@@ -11,5 +11,8 @@ jobs:
         command: ./.circleci/macos_circle_vm_setup.sh
         name: macOS Docker setup
     - run:
-        command: DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
+        command: |
+          ls -a
+          export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
+          DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
 
