@@ -14,5 +14,11 @@ jobs:
         command: |
           ls -a
           export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
-          DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
+          #DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
+          python -V
+          mkdir temp
+          cd temp
+          wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-276.0.0-darwin-x86_64.tar.gz
+          tar -xvf google-cloud*tar.gz
+          ls
 
