@@ -18,5 +18,6 @@ jobs:
     #   command: |
     #     export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
     #     #DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
-
-
+    - run:
+      name: GKE doc test
+      command: ./macos_gke_test.sh

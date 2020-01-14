@@ -29,10 +29,12 @@ If you don't already have the [Google Cloud SDK](https://cloud.google.com/sdk/) 
 - Node.js and Yarn ([installation instructions](https://adaptjs.org/docs/user/install/requirements))
 
 Next, installing Adapt is the easy part, just do:
+<!-- doctest command -->
 
 ```bash
 npm install -g @adpt/cli
 ```
+<!-- doctest output { matchRegex: "\\+ @adpt/cli@" } -->
 
 :::note
 If you get an `EACCES` error from `npm install`, retry the command as administrator (e.g. `sudo npm install -g @adpt/cli`).
@@ -50,6 +52,7 @@ Adapt provides a starter template that you can use to quickly set up a new proje
 For this example, we are going to use the [`hello-react-node-postgres` starter](https://gitlab.com/adpt/starters/hello-react-node-postgres).  
 There are [other starters](https://gitlab.com/adpt/starters) as well, or you can write your own, any git URL will work.
 To set up our starter, simply type:
+<!-- doctest command -->
 
 ```bash
 adapt new hello-react-node-postgres ./myapp
@@ -106,6 +109,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
     The second command to enable the API may take quite a while, so be patient.
     Google says it can take "several minutes".
 
+    <!-- doctest command -->
     ```bash
     gcloud config set compute/zone us-central1-b
     gcloud services enable container.googleapis.com
@@ -125,6 +129,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
     Now create a Kubernetes cluster called `mycluster`.
     For this tutorial, we'll create a small, single node, non-production cluster to keep the cost down.
 
+    <!-- doctest command -->
     ```bash
     gcloud container clusters create mycluster --enable-ip-alias --machine-type "g1-small" --disk-size "30" --num-nodes "1" --no-enable-cloud-monitoring --no-enable-cloud-logging
     ```
@@ -136,6 +141,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
     Now, we have to set up credentials for the Kubernetes cluster and Docker.  
     Just run the following commands, answer yes when it asks you if it is OK to update your configuration.
 
+    <!-- doctest command -->
     ```bash
     gcloud container clusters get-credentials mycluster
     gcloud auth configure-docker
@@ -145,6 +151,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
 
 Now that we have a running Kubernetes cluster, we are ready to deploy our app!
 
+<!-- doctest command -->
 ```bash
 cd myapp/deploy
 export KUBE_DOCKER_REPO=gcr.io/${MYPROJECTID}
@@ -223,12 +230,14 @@ If you don't have an existing database, you can create one using a service like 
 
 First, destroy the app components that Adapt deployed to the GKE cluster:
 
+<!-- doctest command -->
 ```bash
 adapt destroy app-test
 ```
 
 Then destroy the GKE cluster:
 
+<!-- doctest command -->
 ```bash
 gcloud container clusters delete mycluster  # This will take a while
 ```
@@ -240,6 +249,7 @@ There you can delete all the images you don't want to keep around to save on any
 
 If you want, you can also delete the whole project with:
 
+<!-- doctest command -->
 ```bash
 gcloud projects delete ${MYPROJECTID}
 ```
