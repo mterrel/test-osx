@@ -3,6 +3,9 @@
 set -o errexit
 set -x
 
+# Add gcloud to path
+. ./google-cloud-sdk/path.bash.inc
+
 GKETEMP=$(mktemp -d -t gcloud)
 pushd $GKETEMP
 
