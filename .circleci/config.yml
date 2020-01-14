@@ -17,8 +17,14 @@ jobs:
           #DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
           python -V
           mkdir temp
-          cd temp
+          pushd temp
           curl -o gcloud.tgz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-276.0.0-darwin-x86_64.tar.gz
           tar -xvf gcloud.tgz
-          ls
+          ./google-cloud-sdk/install.sh -q
+          . ./google-cloud-sdk/path.bash.inc
+          popd
+          echo "$GCLOUD_SERVICE_KEY" | gcloud auth activate-service-account --key-file=-
+          gcloud auth list
+          
+
 
