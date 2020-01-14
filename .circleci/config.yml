@@ -7,18 +7,18 @@ jobs:
       HOSTCURL: ~/project/docs/test/hostcurl.sh
     steps:
     - checkout
+    # - run:
+    #     command: ./.circleci/macos_circle_vm_setup.sh
+    #     name: macOS Docker setup
     - run:
-        command: ./.circleci/macos_circle_vm_setup.sh
-        name: macOS Docker setup
-    - run:
+        name: Stuff to do
         command: |
-          ls -a
           export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
           #DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
           python -V
           mkdir temp
           cd temp
-          wget https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-276.0.0-darwin-x86_64.tar.gz
-          tar -xvf google-cloud*tar.gz
+          curl -o gcloud.tgz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-276.0.0-darwin-x86_64.tar.gz
+          tar -xvf gcloud.tgz
           ls
 
