@@ -9,6 +9,7 @@ set -x
 #export MYPROJECTID=macos-gke-$(echo $RANDOM$RANDOM | tr '[0-9]' '[a-z]')
 #gcloud projects create --set-as-default $MYPROJECTID --organization 170061401321
 export MYPROJECTID=adapt-testing
+gcloud config set project $MYPROJECTID
 
 npm install -g yarn markdown-clitest
 
