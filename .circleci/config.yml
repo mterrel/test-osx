@@ -7,20 +7,30 @@ jobs:
       HOSTCURL: ~/project/docs/test/hostcurl.sh
     steps:
     - checkout
+
     - run:
         command: ./.circleci/macos_circle_vm_setup.sh
         name: macOS Docker setup
+
     - run:
-        name: Gcloud setup
+      name: GSG test
+      command: |
+        export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
+        DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
+
+    - run:
+        name: gcloud setup
         command: ./.circleci/macos_gcloud_setup.sh
-    # - run:
-    #   name: GSG test
-    #   command: |
-    #     export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
-    #     #DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
+
     - run:
         name: GKE doc test
-        command: ./macos_gke_test.sh || true
+        command: ./macos_gke_test.sh
+        environment:
+          MYPROJECTID: adapt-testing
+
     - run:
         name: GKE cleanup
-        command: gcloud container clusters delete mycluster --quiet || true
+        command: ./macos_gke_cleanup.sh
+        when: always
+        environment:
+          MYPROJECTID: adapt-testing
