@@ -16,6 +16,10 @@ jobs:
         name: GSG test
         command: |
           #export HOSTCURL="$(pwd)/docs/test/hostcurl.sh"
+          pwd
+          ls ~
+          ls ~/project
+          ls ~/project/docs
           echo $HOSTCURL
           ls $HOSTCURL
           DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
