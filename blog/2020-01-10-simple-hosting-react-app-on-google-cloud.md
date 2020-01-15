@@ -144,7 +144,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
     <!-- doctest command -->
     ```bash
     gcloud container clusters get-credentials mycluster
-    gcloud auth configure-docker
+    gcloud auth configure-docker --quiet
     ```
 
 ## Creating a Deployment for your App
