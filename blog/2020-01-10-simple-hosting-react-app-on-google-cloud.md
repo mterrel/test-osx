@@ -239,7 +239,7 @@ Then destroy the GKE cluster:
 
 <!-- doctest command -->
 ```bash
-gcloud container clusters delete mycluster  # This will take a while
+gcloud container clusters delete mycluster --quiet # This will take a while
 ```
 
 You can delete images pushed to the Google Container Registry in the Google Cloud Console:
@@ -249,7 +249,6 @@ There you can delete all the images you don't want to keep around to save on any
 
 If you want, you can also delete the whole project with:
 
-<!-- doctest command -->
 ```bash
 gcloud projects delete ${MYPROJECTID}
 ```
