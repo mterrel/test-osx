@@ -131,7 +131,7 @@ I'll assume you haven't set up Google Cloud before, so you may be able to omit s
 
     <!-- doctest command -->
     ```bash
-    gcloud container clusters create mycluster --enable-ip-alias --machine-type "g1-small" --disk-size "30" --num-nodes "1" --no-enable-cloud-monitoring --no-enable-cloud-logging
+    gcloud container clusters create mycluster --enable-ip-alias --machine-type "g1-small" --disk-size "30" --num-nodes "1" --no-enable-stackdriver-kubernetes
     ```
 
     It will take a few minutes before the cluster is up, but the command will give you some status along the way.  
