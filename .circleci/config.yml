@@ -7,9 +7,9 @@ jobs:
       HOSTCURL: ~/project/docs/test/hostcurl.sh
     steps:
     - checkout
-    # - run:
-    #     command: ./.circleci/macos_circle_vm_setup.sh
-    #     name: macOS Docker setup
+    - run:
+        command: ./.circleci/macos_circle_vm_setup.sh
+        name: macOS Docker setup
     - run:
         name: Gcloud setup
         command: ./.circleci/macos_gcloud_setup.sh
