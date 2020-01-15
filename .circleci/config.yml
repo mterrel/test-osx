@@ -4,19 +4,9 @@ jobs:
     macos:
       xcode: "11.0.0"
     environment:
-      HOSTCURL: ~/docs/test/hostcurl.sh
+      HOSTCURL: ~/project/docs/test/hostcurl.sh
     steps:
     - checkout
-
-    - run:
-        name: debug
-        command: |
-          pwd
-          pushd ~
-          ls
-          pwd
-          popd
-          false
 
     - run:
         name: macOS Docker setup
