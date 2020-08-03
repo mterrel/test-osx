@@ -30,11 +30,11 @@ jobs:
         name: GKE doc test
         command: ./macos_gke_test.sh
         environment:
-          MYPROJECTID: adapt-testing
+          MYPROJECTID: adapt-ci
 
     - run:
         name: GKE cleanup
         command: ./macos_gke_cleanup.sh
         when: always
         environment:
-          MYPROJECTID: adapt-testing
+          MYPROJECTID: adapt-ci
