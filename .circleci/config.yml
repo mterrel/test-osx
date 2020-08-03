@@ -4,7 +4,7 @@ jobs:
     macos:
       xcode: "11.0.0"
     environment:
-      HOSTCURL: $HOME/project/docs/test/hostcurl.sh
+      HOSTCURL: /Users/distiller/project/docs/test/hostcurl.sh
     steps:
     - checkout
 
@@ -19,7 +19,7 @@ jobs:
           pwd
           ls -l ~/project/docs/test
           echo "HOSTCURL: $HOSTCURL"
-          ls -l $HOSTCURL || true
+          ls -l $HOSTCURL
           DEBUG=clitest:output,clitest:commands markdown-clitest docs/getting_started
 
     - run:
