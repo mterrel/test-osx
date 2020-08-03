@@ -7,12 +7,11 @@ title: "Install Adapt"
 
 ## Requirements
 
-To install and use Adapt, you must have **both** of the following:
+To install and use Adapt, you must have Node.js installed:
 
 | Requirement | Installation Instructions |
 | --- | --- |
-| [Node.js](https://nodejs.org) verson 10 | [Installing Node and npm](../user/install/requirements.md#nodejs-10-with-npm) |
-| [Yarn Package Manager](https://yarnpkg.com) | [Installing yarn](../user/install/requirements.md#yarn) |
+| [Node.js](https://nodejs.org) (versions supported: 10-13) | [Installing Node and npm](../user/install/requirements.md#nodejs-with-npm) |
 
 Additionally, this Getting Started Guide also requires [Docker](https://docker.com).
 You'll need **one** of the following:
@@ -22,10 +21,10 @@ You'll need **one** of the following:
 | A Linux system with Docker | [Installing Docker on Linux](https://docs.docker.com/install/#server) |
 | A MacOS system with Docker Desktop for Mac | [Installing Docker Desktop for Mac](https://docs.docker.com/docker-for-mac/install/) |
 
-> **NOTE**
->
-> If you're using Docker on Linux, you'll need to either run all `docker` commands as superuser (`root`) or ensure your user is part of the `docker` group.
-> For instructions and more information, see the Docker [Linux post-install instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+:::note
+If you're using Docker on Linux, you'll need to either run all `docker` commands as superuser (`root`) or ensure your user is part of the `docker` group.
+For instructions and more information, see the Docker [Linux post-install instructions](https://docs.docker.com/install/linux/linux-postinstall/).
+:::
 
 Docker is correctly installed if the command `docker ps` does not show any errors.
 
@@ -35,19 +34,30 @@ If you use a different shell, you may need to adjust some commands slightly.
 ## Installing Adapt
 
 To install the `adapt` CLI globally:
+
 <!-- doctest command -->
+<!--DOCUSAURUS_CODE_TABS-->
+<!--npm-->
 
 ```console
-npm install -g @adpt/cli
+npm install -g @adpt/cli@next
 ```
+
+<!--yarn-->
+
+```console
+yarn global add @adpt/cli
+```
+
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 <!-- doctest output { matchRegex: "\\+ @adpt/cli@" } -->
 
-> **NOTE**
->
-> Depending on how your `npm` installation is set up, you may need root or administrator privileges to install an `npm` module globally.
->
-> If you get an `EACCES` error from `npm install`, use the `npx` instructions below or retry the command with administrator privileges (e.g. with `sudo`).
+:::note
+Depending on how your `npm` or `yarn` installation is set up, you may need root or administrator privileges to install a module globally.
+
+If you get an `EACCES` error from `npm install` or see any other errors related to insufficient permissions you may need to retry the command with administrator privileges (e.g. with `sudo`).
+:::
 
 <details>
 <summary>Alternately, if you'd rather not install Adapt globally, you can run Adapt using npx (click to expand)</summary>

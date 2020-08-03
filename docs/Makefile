@@ -1,4 +1,4 @@
-include ../build_support/common.mk
+include ../config/build_support/common.mk
 
 # Always run inside Docker
 include $(BUILD_SUPPORT)/dockerize.mk
@@ -14,12 +14,24 @@ else
 DOCS_REGISTRY:=$(ADAPT_TEST_REGISTRY)
 endif
 
+ADAPT_TMPDIR := $(ADAPT_TMPDIR_BASE)/$(notdir $(CURDIR))
 
 LONG_TESTS:=$(call to_bool,$(ADAPT_RUN_LONG_TESTS))
 ifeq ($(LONG_TESTS),true)
-# For debugging, use the following command instead:
-#CLITEST:=NPM_CONFIG_REGISTRY=$(DOCS_REGISTRY) DEBUG=clitest:output,clitest:commands markdown-clitest --no-cleanup
-CLITEST:=NPM_CONFIG_REGISTRY=$(DOCS_REGISTRY) markdown-clitest
+define CLITEST
+NPM_CONFIG_REGISTRY=$(DOCS_REGISTRY) \
+PREFIX=$(ADAPT_TMPDIR) \
+PATH="$${PREFIX}/bin:$(PATH)" \
+XDG_CONFIG_HOME=$${ADAPT_TMPDIR}/.config \
+XDG_DATA_DIR=$${ADAPT_TMPDIR}/.data \
+XDG_CACHE_DIR=$${ADAPT_TMPDIR}/.cache \
+HOME=$${ADAPT_TMPDIR} \
+markdown-clitest
+endef
+# For debugging, copy the following two lines into CLITEST above
+#DEBUG=clitest:output,clitest:commands
+#markdown-clitest --no-cleanup
+
 LT_TOUCH:=touch
 else
 CLITEST:=@echo "Skipping test of"
@@ -58,6 +70,8 @@ dist/.test-success: $(addsuffix /.test-success,$(MD_TEST_DIRS))
 	$(LT_TOUCH) $@
 
 GS_FILES := $(shell find getting_started -type f -regex '.*\.md')
+# The GSG does a global NPM install. In order to not ACTUALLY do a global
+# install, create a temp directory and set PREFIX so npm installs there.
 getting_started/.test-success: $(GS_FILES)
 	$(CLITEST) getting_started
 	$(LT_TOUCH) $@
@@ -90,5 +104,9 @@ docs: dist/.docs_success
 dist/.docs_success:
 	mkdir -p dist
 	touch $@
+
+$(ADAPT_TMPDIR)/.yarnrc: $(REPO_ROOT)/config/yarnrc_test
+	mkdir -p $(ADAPT_TMPDIR)
+	cp $(REPO_ROOT)/config/yarnrc_test $(ADAPT_TMPDIR)/.yarnrc
 
 endif # IN_DOCKER
